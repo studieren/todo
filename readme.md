@@ -1,7 +1,7 @@
 ﻿# 应用简介
 本应用是一个前后端分离的项目，实现了一个简单的待办事项列表 to do list
 
-## 项目预览
+## 项目效果预览图
 ![alt text](image.png)
 
 ## 技术
@@ -33,6 +33,8 @@ go mod tidy
 go build
 ```
 如果是windows系统，会生成todo_back.exe文件，直接双击即可运行
+后端网址：`http://localhost:1111`
+后端接口文档：`http://localhost:1111/swagger/index.html`
 
 2. 运行前端
 cd 进入目录
