@@ -1,0 +1,213 @@
+basePath: /api/v1
+definitions:
+  main.Todo:
+    properties:
+      completed:
+        type: boolean
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      due_date:
+        type: string
+      id:
+        type: integer
+      title:
+        type: string
+      updated_at:
+        type: string
+    required:
+    - title
+    type: object
+host: localhost:1111
+info:
+  contact:
+    email: support@example.com
+    name: API Support
+    url: http://example.com/support
+  description: A simple Todo management API for creating, reading, updating, and deleting
+    tasks.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://example.com/terms/
+  title: Todo API
+  version: "1.0"
+  x-logo:
+    altText: Todo API Logo
+    backgroundColor: '#FFFFFF'
+    url: http://example.com/logo.png
+paths:
+  /todos:
+    get:
+      consumes:
+      - application/json
+      description: 从数据库中检索所有待办事项的列表。
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of todo items
+          schema:
+            items:
+              $ref: '#/definitions/main.Todo'
+            type: array
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: 列出所有待办事项
+      tags:
+      - todos
+    post:
+      consumes:
+      - application/json
+      description: Adds a new todo item to the database.
+      parameters:
+      - description: Todo item to create
+        in: body
+        name: todo
+        required: true
+        schema:
+          $ref: '#/definitions/main.Todo'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created todo item
+          schema:
+            $ref: '#/definitions/main.Todo'
+        "400":
+          description: Invalid request payload
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create a new todo item
+      tags:
+      - todos
+  /todos/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Deletes a specific todo item by its ID.
+      parameters:
+      - description: Todo ID
+        in: path
+        minimum: 1
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Todo deleted successfully
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Todo not found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Delete a todo item
+      tags:
+      - todos
+    get:
+      consumes:
+      - application/json
+      description: Retrieves details of a specific todo item by its ID.
+      parameters:
+      - description: Todo ID
+        in: path
+        minimum: 1
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Todo item details
+          schema:
+            $ref: '#/definitions/main.Todo'
+        "404":
+          description: Todo not found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get a todo item
+      tags:
+      - todos
+    put:
+      consumes:
+      - application/json
+      description: Updates the details of a specific todo item by its ID.
+      parameters:
+      - description: Todo ID
+        in: path
+        minimum: 1
+        name: id
+        required: true
+        type: integer
+      - description: Updated todo item
+        in: body
+        name: todo
+        required: true
+        schema:
+          $ref: '#/definitions/main.Todo'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Updated todo item
+          schema:
+            $ref: '#/definitions/main.Todo'
+        "400":
+          description: Invalid request payload
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Todo not found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Update a todo item
+      tags:
+      - todos
+schemes:
+- http
+swagger: "2.0"
