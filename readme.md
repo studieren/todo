@@ -1,6 +1,9 @@
 ﻿# 应用简介
 本应用是一个前后端分离的项目，实现了一个简单的待办事项列表 to do list
 
+## 项目预览
+![alt text](image.png)
+
 ## 技术
 后端使用gin, gorm, sqlite3
 前端使用react
